@@ -4,6 +4,10 @@ import handlebars from "express-handlebars"
 //init express instance
 const app = express();
 
+//add static middleware
+//every request looks if the request is searching for a static folder
+app.use(express.static('./src/public'))
+
 //add and config view engine
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
