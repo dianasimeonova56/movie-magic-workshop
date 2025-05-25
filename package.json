@@ -1,0 +1,22 @@
+{
+  "name": "express-workshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dianasimeonova56/movie-magic-workshop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/dianasimeonova56/movie-magic-workshop/issues"
+  },
+  "homepage": "https://github.com/dianasimeonova56/movie-magic-workshop#readme",
+  "description": ""
+}
