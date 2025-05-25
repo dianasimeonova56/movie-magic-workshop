@@ -9,8 +9,13 @@ app.engine('hbs', handlebars.engine({
     extname: 'hbs',
 }));
 
+//constant in express 
+
 //set default engine
 app.set('view engine', 'hbs');
+
+//set default view folder
+app.set('views', './src/views')
 
 //config routes
 app.get('/', (req, res) => {
