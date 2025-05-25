@@ -23,11 +23,11 @@ app.set('views', './src/views')
 
 //config routes
 app.get('/', (req, res) => {
-    res.render('home', {layout:false});
+    res.render('home');
 });
 
 app.get('/about', (req, res)=> {
-    res.render('about', {layout:false})
+    res.render('about')
 })
 
 //start express server
