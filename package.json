@@ -18,5 +18,8 @@
     "url": "https://github.com/dianasimeonova56/movie-magic-workshop/issues"
   },
   "homepage": "https://github.com/dianasimeonova56/movie-magic-workshop#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
