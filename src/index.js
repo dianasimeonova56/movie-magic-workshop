@@ -1,6 +1,6 @@
 import express from "express"
 import handlebars from "express-handlebars"
-import { homeController } from "./controllers/homeController"; // modular router
+import homeController from './controllers/homeController.js'; // modular router
 
 //init express instance
 const app = express();

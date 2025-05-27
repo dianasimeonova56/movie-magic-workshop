@@ -1,17 +1,22 @@
+import express from 'express';
+import movieService from '../services/movieService.js';
+
+const homeController = express.Router();
 //modular router -> subrouter of the main router
 //they take care of the request
 //specific for this area - home
 //better separation of concerns
 
-import express from 'express'
+//1st layer - controller
 
-export const homeController = express.Router();
+homeController.get('/', (req, res) => {
+    const movies = movieService.getAll();
 
-//config routes
-app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', { movies });
 });
 
-app.get('/about', (req, res)=> {
-    res.render('about')
-})
+homeController.get('/about', (req, res) => {
+    res.render('about');
+});
+
+export default homeController;
