@@ -12,7 +12,7 @@ const homeController = express.Router();
 homeController.get('/', (req, res) => {
     const movies = movieService.getAll();
 
-    res.render('home', { movies });
+    res.render('home', { movies }); // the data goes to the template
 });
 
 homeController.get('/about', (req, res) => {
