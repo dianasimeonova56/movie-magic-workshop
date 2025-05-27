@@ -10,6 +10,11 @@ const app = express();
 //every request looks if the request is searching for a static folder
 app.use(express.static('./src/public'))
 
+//add body parser
+app.use(express.urlencoded()); 
+// middleware from express that is a body parser - if there is data in the requests, it reads it and accumulates it in chunks
+// now we have req.body 
+
 //add and config view engine
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
