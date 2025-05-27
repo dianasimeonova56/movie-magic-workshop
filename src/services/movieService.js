@@ -1,5 +1,5 @@
 //2nd layer - services
-//services - data rendering? other than receiving and displaying
+//services - data rendering? receiving and displaying
 
 const movies = [
     {
@@ -39,5 +39,9 @@ const movies = [
 export default {
     getAll() {
         return movies;
-    }
+    },
+    create(movieData) {
+        movies.push(movieData);
+        return movieData;
+    },
 }
