@@ -1,5 +1,6 @@
 import express from "express"
 import handlebars from "express-handlebars"
+import { homeController } from "./controllers/homeController"; // modular router
 
 //init express instance
 const app = express();
@@ -22,13 +23,7 @@ app.set('view engine', 'hbs');
 app.set('views', './src/views')
 
 //config routes
-app.get('/', (req, res) => {
-    res.render('home');
-});
-
-app.get('/about', (req, res)=> {
-    res.render('about')
-})
+app.use(homeController) // app -> main router, use the modular router
 
 //start express server
 app.listen(5000, () => {
