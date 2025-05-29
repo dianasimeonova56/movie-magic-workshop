@@ -31,6 +31,9 @@ app.set('views', './src/views')
 //config routes
 app.use(homeController) // app -> main router, use the modular router
 app.use('/movies', movieController)  // only when our url starts with '/movies'
+app.all('*url', (req, res) => {//in the end, bc if we have gone through the abpve controllers and have not rendered anything, we should display 404
+    res.render('404');
+})
 
 //start express server
 app.listen(5000, () => {
