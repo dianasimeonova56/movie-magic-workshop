@@ -59,6 +59,7 @@ export default {
     },
     create(movieData) {
         movieData.id = uuid();
+        movieData.rating = Number(movieData.rating);
 
         movies.push(movieData);
         
