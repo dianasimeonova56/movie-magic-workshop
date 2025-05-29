@@ -1,3 +1,4 @@
+import {v4 as uuid} from 'uuid'
 //2nd layer - services
 //services - data rendering? receiving and displaying
 
@@ -41,7 +42,10 @@ export default {
         return movies;
     },
     create(movieData) {
+        movieData.id = uuid();
+
         movies.push(movieData);
+        
         return movieData;
     },
     getOne(movieId) {
