@@ -28,6 +28,7 @@ const movies = [
     {
         "id": "81313c94-08e0-40bf-85bc-1e7cdeebbef9",
         "title": "Avengers: Endgame",
+        "genre": "Superhero",
         "category": "movie",
         "director": "Anthony Russo",
         "year": "2019",
@@ -38,8 +39,23 @@ const movies = [
 ];
 
 export default {
-    getAll() {
-        return movies;
+    getAll(filter = {}) { //by default filter is empty
+        let result = movies.slice(); //refernece to the array with all the same elemtns , shallow copy
+
+        if(filter.search) {
+            result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
+        }
+
+        if(filter.genre) {
+            //result = result.filter(movie => movie.genre.localeCompare(filter.genre, undefined, {sensitivity: 'accent'})===0);
+            result = result.filter(movie => movie.genre.toLowerCase() === filter.genre.toLowerCase())
+        }
+
+        if(filter.year) {
+            result = result.filter(movie => movie.year === filter.year)
+        }
+        
+        return result;
     },
     create(movieData) {
         movieData.id = uuid();
