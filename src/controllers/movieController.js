@@ -7,11 +7,11 @@ movieController.get('/create', (req, res) => {
     res.render('create');
 })
 
-movieController.post('/create', (req, res) => {
+movieController.post('/create', async (req, res) => {
     const newMovie = req.body;
 
     //save movie
-    movieService.create(newMovie);
+    await movieService.create(newMovie);
 
 
     //redirect to home page
@@ -30,11 +30,11 @@ movieController.get('/:movieId/details', (req, res) => {
     
 })
 
-movieController.get('/search', (req, res) => {
+movieController.get('/search', async (req, res) => {
     //get query string
     const filter = req.query;
 
-    const movies = movieService.getAll(filter);
+    const movies = await movieService.getAll(filter);
     res.render('search', {movies});
 })
 

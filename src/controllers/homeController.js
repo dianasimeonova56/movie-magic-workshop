@@ -9,8 +9,10 @@ const homeController = express.Router();
 
 //1st layer - controller
 
-homeController.get('/', (req, res) => {
-    const movies = movieService.getAll();
+homeController.get('/',  (req, res) => {
+    const movies =  movieService.getAll();
+    //console.log(movies);
+    
 
     res.render('home', { movies }); // the data goes to the template
 });
