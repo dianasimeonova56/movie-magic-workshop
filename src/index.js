@@ -1,5 +1,6 @@
 import express from "express"
 import handlebars from "express-handlebars"
+import mongoose from "mongoose";
 import homeController from './controllers/homeController.js'; // modular router
 import movieController from "./controllers/movieController.js";
 
@@ -11,7 +12,7 @@ const app = express();
 app.use(express.static('./src/public'))
 
 //add body parser
-app.use(express.urlencoded()); 
+app.use(express.urlencoded());
 // middleware from express that is a body parser - if there is data in the requests, it reads it and accumulates it in chunks
 // now we have req.body 
 
@@ -26,6 +27,15 @@ app.engine('hbs', handlebars.engine({
 }));
 
 //constant in express 
+try {
+    mongoose.connect('mongodb://localhost:27017', { dbName: 'magic-movies' });
+    console.log("Successfully connected to db");
+    
+} catch (err) {
+    console.log('cannot connect to db');
+    console.log(err.message);
+}
+
 
 //set default engine
 app.set('view engine', 'hbs');
