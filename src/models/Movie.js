@@ -18,7 +18,7 @@ export default class Movie {
 
         movies.push(this.data);
 
-        await fs.writeFile('../database.json', JSON.stringify(movies, null, 4));
+        await fs.writeFile('./src/database.json', JSON.stringify(movies, null, 4));
 
         return this.data;
     }

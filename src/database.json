@@ -1,4 +1,4 @@
- [
+[
     {
         "id": "a3682672-0ee4-1284-8759-35ee253329zv",
         "title": "Jungle Cuise",
@@ -31,5 +31,16 @@
         "imageUrl": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg",
         "rating": 8.4,
         "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\" actions and restore balance to the universe."
+    },
+    {
+        "title": "aa",
+        "category": "tv-show",
+        "genre": "aa",
+        "director": "aa",
+        "year": "1234",
+        "imageUrl": "https://i1.sndcdn.com/avatars-1utUXjzJDp44NImm-Qy1TUg-t500x500.jpg",
+        "rating": 2,
+        "description": "aa",
+        "id": "a513036e-7573-42c8-841e-b30a623daad2"
     }
 ]
