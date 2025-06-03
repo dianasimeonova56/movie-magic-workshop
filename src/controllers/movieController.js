@@ -1,5 +1,6 @@
 import express from 'express'
 import movieService from '../services/movieService.js';
+import castService from '../services/castService.js';
 
 const movieController = express.Router();
 // 'movie' comes from the index.js
@@ -26,8 +27,8 @@ movieController.get('/:movieId/details', async (req, res) => {
 
     const movie = await movieService.getOne(movieId);
 
-    res.render('movie/details', {movie});
-    
+    res.render('movie/details', { movie });
+
 })
 
 movieController.get('/search', async (req, res) => {
@@ -35,7 +36,7 @@ movieController.get('/search', async (req, res) => {
     const filter = req.query;
 
     const movies = await movieService.getAll(filter);
-    res.render('search', {movies, filter});
+    res.render('search', { movies, filter });
 })
 
 movieController.get('/:movieId/attach', async (req, res) => {
@@ -44,6 +45,21 @@ movieController.get('/:movieId/attach', async (req, res) => {
     //get movie
     const movie = await movieService.getOne(movieId);
 
-    res.render('movie/attach',{movie});
+    // get all casts
+    const casts = await castService.getAll();
+
+    // pass casts to template
+    res.render('movie/attach', { movie, casts });
+})
+
+movieController.post('/:movieId/attch', async (req, res) => {
+    //get movieid
+    const movieId = req.params.movieId;
+
+    //get castid
+    const castId = req.body.cast;
+
+    //attach cast to movie
+    
 })
 export default movieController;
