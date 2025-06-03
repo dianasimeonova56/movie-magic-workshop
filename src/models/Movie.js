@@ -1,4 +1,5 @@
 import {Schema, model} from "mongoose";
+import { validate } from "uuid";
 
 const maxYearAllowed = new Date().getFullYear() + 5;
 const movieSchema = new Schema({
@@ -27,10 +28,13 @@ const movieSchema = new Schema({
     imageUrl: {
         type: String,
         required: [true, "Field imageUrl is required!"],
+        validate: [/^https?:\/\//, 'Invalid ImageUrl!'],
     },
     rating: {
        type: Number,
         required: [true, "Field rating is required!"],
+        min: [1, "Rating cannot be lower than 1"],
+        max: [10, "Rating should not be higher than 10!"],
     },
     description: {
         type: String,
