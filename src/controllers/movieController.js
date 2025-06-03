@@ -27,7 +27,10 @@ movieController.get('/:movieId/details', async (req, res) => {
 
     const movie = await movieService.getOne(movieId);
 
-    res.render('movie/details', { movie });
+    //get movie cast
+    const casts = await movieService.getCasts(movieId);
+
+    res.render('movie/details', { movie, casts });
 
 })
 

@@ -1,4 +1,5 @@
 import Movie from '../models/Movie.js';
+import Cast from '../models/Cast.js'
 //2nd layer - services
 //services - data rendering? receiving and displaying
 
@@ -46,4 +47,11 @@ export default {
         movie.casts.push(castId); // we can do this bc its a document
         return movie.save();
     },
+    async getCasts(movieId) {
+        const movie = await this.getOne(movieId);
+
+        const casts = await Cast.find({_id: {$in: movie.casts}});
+
+        return casts;
+    }
 }
