@@ -9,8 +9,8 @@ const homeController = express.Router();
 
 //1st layer - controller
 
-homeController.get('/',  (req, res) => {
-    const movies =  movieService.getAll();
+homeController.get('/',  async (req, res) => {
+    const movies = await movieService.getAll();
     //console.log(movies);
     
 
