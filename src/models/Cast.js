@@ -20,7 +20,7 @@ const castSchema = new Schema({
         required: true,
         validate: [/^https?:\/\//, 'Invalid ImageUrl!'],
     },
-
+    
 })
 
 const Cast = model("Cast", castSchema);

@@ -25,12 +25,12 @@ movieController.get('/:movieId/details', async (req, res) => {
     //get movie id from params
     const movieId = req.params.movieId;
 
-    const movie = await movieService.getOne(movieId);
+    const movie = await movieService.getOne(movieId); // its with populated casta
 
     //get movie cast
-    const casts = await movieService.getCasts(movieId);
+    // const casts = await movieService.getCasts(movieId);
 
-    res.render('movie/details', { movie, casts });
+    res.render('movie/details', { movie });
 
 })
 

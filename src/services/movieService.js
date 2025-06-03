@@ -34,7 +34,10 @@ export default {
         return movie.save();
     },
     async getOne(movieId) {
-        const movie = await Movie.findById(movieId);
+        const movie = await Movie.findById(movieId).populate('casts'); 
+        // populate - before we await the document, populate the given array, not with just the ids
+        //it will get all the referenced casts and populate the array
+        
 
         console.log(movie);
         
@@ -47,11 +50,11 @@ export default {
         movie.casts.push(castId); // we can do this bc its a document
         return movie.save();
     },
-    async getCasts(movieId) {
-        const movie = await this.getOne(movieId);
+    // async getCasts(movieId) {
+    //     const movie = await this.getOne(movieId);
 
-        const casts = await Cast.find({_id: {$in: movie.casts}});
+    //     const casts = await Cast.find({_id: {$in: movie.casts}});
 
-        return casts;
-    }
+    //     return casts;
+    // }
 }
