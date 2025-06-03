@@ -1,5 +1,4 @@
-import {Schema, model} from "mongoose";
-import { validate } from "uuid";
+import {Schema, model, Types} from "mongoose";
 
 const maxYearAllowed = new Date().getFullYear() + 5;
 const movieSchema = new Schema({
@@ -39,8 +38,15 @@ const movieSchema = new Schema({
     description: {
         type: String,
         required: [true, "Field description is required!"],
-        maxLength: [100, "Description is too long!"],
-    }
+        maxLength: [1000, "Description is too long!"],
+    },
+    //reference; array with object ids that refer to the Cast model
+    casts: [
+        {
+            type: Types.ObjectId,
+            ref: 'Cast',
+        }
+    ]
 })
 
 const Movie = model('Movie', movieSchema);

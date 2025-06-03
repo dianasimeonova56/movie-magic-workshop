@@ -38,5 +38,12 @@ export default {
         console.log(movie);
         
         return movie;
-    }
+    },
+    async attach(movieId, castId) {
+        //var1 
+        const movie = await this.getOne(movieId); //document
+        
+        movie.casts.push(castId); // we can do this bc its a document
+        return movie.save();
+    },
 }
