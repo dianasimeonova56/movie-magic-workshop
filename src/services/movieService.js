@@ -33,7 +33,7 @@ export default {
         return movie.save();
     },
     getOne(movieId) {
-        const movie = movies.find(movie => movie.id === movieId);
+        const movie = Movie.findById(movieId);
 
         console.log(movie);
         
