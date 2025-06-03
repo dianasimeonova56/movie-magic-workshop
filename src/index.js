@@ -23,8 +23,18 @@ app.engine('hbs', handlebars.engine({
         showRating(rating) {
             return '&#x2605'.repeat(Math.floor(rating));
         }
+    },
+    runtimeOptions: {
+        allowProtoMethodsByDefault: true,
+        allowProtoPropertiesByDefault: true
+        //allow to use proto properties/methods in hbs to access methods
+        // and resolve hbs not dealing correctly with mongoose documents
+        //instead of using lean()
     }
 }));
+//mongoose document - proto base document
+//full with methods and properties
+// we allow hbs to use them 
 
 //constant in express 
 try {
