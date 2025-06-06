@@ -13,6 +13,7 @@ const movieSchema = new Schema({
     genre: {
         type: String,
         required: [true, "Field genre is required!"],
+        lowercase: true, //not a validator, but a sanitizer -> it will make it lowercase
     },
     director: {
         type: String,

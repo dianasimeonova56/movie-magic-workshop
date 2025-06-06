@@ -5,28 +5,30 @@ import Cast from '../models/Cast.js'
 
 
 export default {
-     async getAll(filter = {}) { //by default filter is empty
+      getAll(filter = {}) { //by default filter is empty
         //let result = await Movie.find({}); // returns a query, await - returns a document
         //we can say .lean() and return from the query a js object
         //only use when we need the objects, to populate or filter
         //bc it only returns objects
+        let query = Movie.find(); // we do not await, we just get the query 
     
-        let result = await Movie.find({}).lean();
+        //let result = await Movie.find({}).lean();
 
         if(filter.search) { 
-            result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
+            query = query.find({title: {$regex: new RegExp(filter.search, 'i')}})
         }
 
         if(filter.genre) {
-            //result = result.filter(movie => movie.genre.localeCompare(filter.genre, undefined, {sensitivity: 'accent'})===0);
-            result = result.filter(movie => movie.genre.toLowerCase() === filter.genre.toLowerCase())
+            query = query.find({genre: filter.genre.toLowerCase()})
+            console.log(query);
+            
         }
 
         if(filter.year) {
-            result = result.filter(movie => movie.year === filter.year)
+            query = query.find({year: filter.year});
         }
         
-        return result;
+        return query;
     },
     create(movieData) {
        const movie = new Movie(movieData);
