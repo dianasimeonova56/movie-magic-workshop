@@ -39,7 +39,7 @@ movieController.get('/search', async (req, res) => {
     const filter = req.query;
 
     const movies = await movieService.getAll(filter);
-    
+
     res.render('search', { movies, filter });
 })
 
@@ -50,7 +50,7 @@ movieController.get('/:movieId/attach', async (req, res) => {
     const movie = await movieService.getOne(movieId);
 
     // get all casts
-    const casts = await castService.getAll();
+    const casts = await castService.getAll({exclude: movie.casts}); // exclude the casts that are already attached
 
     // pass casts to template
     res.render('movie/attach', { movie, casts });
