@@ -6,6 +6,7 @@ import homeController from './controllers/homeController.js'; // modular router
 import movieController from "./controllers/movieController.js";
 import castController from "./controllers/castController.js";
 import userController from "./controllers/userController.js";
+import cookieParser from "cookie-parser";
 
 //init express instance
 const app = express();
@@ -13,6 +14,9 @@ const app = express();
 //add static middleware
 //every request looks if the request is searching for a static folder
 app.use(express.static('./src/public'))
+
+//cookie parser - middleware
+app.user(cookieParser())
 
 //add body parser
 app.use(express.urlencoded());
