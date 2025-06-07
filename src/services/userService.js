@@ -4,9 +4,19 @@ export default{
     register(userData) {
         return User.create(userData)
     },
-    login(loginData) {
+    async login(email, password) {
+        const user = await User.find({email});
 
+        if(!user) {
+            return new Error("No such user!");
+        }
 
-        
+        const isValid = await bcrypt.compare(password, user.password);
+
+        if(!isValid) {
+            return new Error('Invalid password!');
+        }
+
+        return '';
     }
 }
