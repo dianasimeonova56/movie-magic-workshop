@@ -16,7 +16,7 @@ const app = express();
 app.use(express.static('./src/public'))
 
 //cookie parser - middleware
-app.user(cookieParser())
+app.use(cookieParser())
 
 //add body parser
 app.use(express.urlencoded());
