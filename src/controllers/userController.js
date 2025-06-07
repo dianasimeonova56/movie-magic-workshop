@@ -3,7 +3,7 @@ import {Router} from 'express';
 const userController = Router();
 
 userController.get('/register', (req, res) => {
-    res.send('Register page');
+    res.render('user/register')
 })
 
 
