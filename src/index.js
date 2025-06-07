@@ -1,9 +1,11 @@
 import express from "express"
 import handlebars from "express-handlebars"
 import mongoose from "mongoose";
+
 import homeController from './controllers/homeController.js'; // modular router
 import movieController from "./controllers/movieController.js";
 import castController from "./controllers/castController.js";
+import userController from "./controllers/userController.js";
 
 //init express instance
 const app = express();
@@ -58,9 +60,11 @@ app.set('views', './src/views')
 app.use(homeController) // app -> main router, use the modular router
 app.use('/movies', movieController)  // only when our url starts with '/movies'
 app.use('/casts', castController)
+app.use('/users', userController)
 app.all('*url', (req, res) => {//in the end, bc if we have gone through the abpve controllers and have not rendered anything, we should display 404
     res.render('404');
 })
+
 
 //start express server
 app.listen(5000, () => {
