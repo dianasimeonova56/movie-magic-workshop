@@ -8,17 +8,23 @@ userController.get('/register', (req, res) => {
 })
 
 userController.post('/register', async (req, res) => {
-    //GET DATA from req
     const userData = req.body;
 
-    //register user
     await userService.register(userData)
-    //redirect to login
+
     res.redirect('/users/login');
 })
 
 userController.get('/login', (req, res) => {
     res.render('user/login')
+})
+
+userController.post('/login', async (req, res) => {
+    const loginData = req.body;
+
+    const resutl = await userService.login(loginData)
+
+    red.redirect('/')
 })
 
 
