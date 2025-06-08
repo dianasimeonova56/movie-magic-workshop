@@ -27,13 +27,13 @@ movieController.get('/:movieId/details', async (req, res) => {
     //get movie id from params
     const movieId = req.params.movieId;
 
+    const userId = req.user?.id; // guest - no id, logged in - userId
+
     const movie = await movieService.getOne(movieId); // its with populated casta
 
-    //get movie cast
-    // const casts = await movieService.getCasts(movieId);
+    const isOwner = movie.owner?.equals(userId);
 
-    res.render('movie/details', { movie });
-
+    res.render('movie/details', { movie, isOwner });
 })
 
 movieController.get('/search', async (req, res) => {
