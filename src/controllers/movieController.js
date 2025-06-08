@@ -52,7 +52,7 @@ movieController.get('/:movieId/attach', async (req, res) => {
     const movie = await movieService.getOne(movieId);
 
     // get all casts
-    const casts = await castService.getAll({exclude: movie.casts}); // exclude the casts that are already attached
+    const casts = await castService.getAll({ exclude: movie.casts }); // exclude the casts that are already attached
 
     // pass casts to template
     res.render('movie/attach', { movie, casts });
@@ -70,5 +70,13 @@ movieController.post('/:movieId/attach', async (req, res) => {
 
     res.redirect(`/movies/${movieId}/details`);
 
+})
+
+movieController.get('/:movieId/delete', async (req, res) => {
+    const movieId = req.params.movieId;
+
+    await movieService.delete(movieId);
+
+    res.redirect('/');
 })
 export default movieController;

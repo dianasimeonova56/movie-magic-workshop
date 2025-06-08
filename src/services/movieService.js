@@ -54,11 +54,7 @@ export default {
         movie.casts.push(castId); // we can do this bc its a document
         return movie.save();
     },
-    // async getCasts(movieId) {
-    //     const movie = await this.getOne(movieId);
-
-    //     const casts = await Cast.find({_id: {$in: movie.casts}});
-
-    //     return casts;
-    // }
+    async delete(movieId) {
+        return Movie.findByIdAndDelete(movieId);
+    }
 }
