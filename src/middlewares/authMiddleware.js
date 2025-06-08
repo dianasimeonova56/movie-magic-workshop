@@ -8,12 +8,13 @@ export const auth = (req, res, next) => {
     }
 
     try {
-        const decoded = jsonwebtoken.verify(token, jwtSecret);
- 
+        const { id, email } = jsonwebtoken.verify(token, jwtSecret);
+
+        req.user = { id, email }; // attach to the request with new info
 
         next();
     } catch (err) {
-    res.clearCookie('auth'); // if its invalid cookie, we should clear it
-       res.redirect('/users/login');
+        res.clearCookie('auth'); // if its invalid cookie, we should clear it
+        res.redirect('/users/login');
     }
 };
