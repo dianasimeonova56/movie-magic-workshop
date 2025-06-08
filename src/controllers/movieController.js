@@ -9,10 +9,12 @@ movieController.get('/create', (req, res) => {
 })
 
 movieController.post('/create', async (req, res) => {
+    const userId = req.user.id; // get the owner id
+
     const newMovie = req.body;
 
     //save movie
-    await movieService.create(newMovie);
+    await movieService.create(newMovie, userId);
 
 
     //redirect to home page
