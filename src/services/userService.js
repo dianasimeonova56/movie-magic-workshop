@@ -1,8 +1,7 @@
 import User from "../models/User.js"
 import bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken'
-
-const jwtsecret = 'vjsndkjbhjvwEJDSMKXNHVUSJKDAMCNJLFEKADSCXNKMNBJNB4864v5wd45s4'
+import { jwtSecret } from "../config/general.js";
 
 export default{
     register(userData) {
@@ -26,8 +25,7 @@ export default{
             email: user.email,
         }
 
-        const token = jsonwebtoken.sign(payload, jwtsecret, {expiresIn: '2h'});
-
+        const token = jsonwebtoken.sign(payload, jwtSecret, {expiresIn: '2h'});
 
         return token;
     }

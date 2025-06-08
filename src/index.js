@@ -7,6 +7,7 @@ import movieController from "./controllers/movieController.js";
 import castController from "./controllers/castController.js";
 import userController from "./controllers/userController.js";
 import cookieParser from "cookie-parser";
+import { auth } from "./middlewares/authMiddleware.js";
 
 //init express instance
 const app = express();
@@ -22,6 +23,10 @@ app.use(cookieParser())
 app.use(express.urlencoded());
 // middleware from express that is a body parser - if there is data in the requests, it reads it and accumulates it in chunks
 // now we have req.body 
+
+//add auth middleware
+app.use(auth);
+
 
 //add and config view engine
 app.engine('hbs', handlebars.engine({
