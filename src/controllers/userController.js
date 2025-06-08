@@ -30,5 +30,13 @@ userController.post('/login', async (req, res) => {
     res.redirect('/')
 })
 
+userController.get('/logout', async (req, res) => {
+    res.clearCookie('auth'); // clear the current cookie to clear the session
+
+    // TODO Invalidate token -> when we end the session we need to make the token invalid to prevent hijacking
+
+    res.redirect('/')
+})
+
 
 export default userController;
