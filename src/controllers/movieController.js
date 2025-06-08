@@ -6,7 +6,7 @@ const movieController = express.Router();
 // 'movie' comes from the index.js
 movieController.get('/create', (req, res) => {
     res.render('create');
-})
+});
 
 movieController.post('/create', async (req, res) => {
     const userId = req.user.id; // get the owner id
@@ -21,7 +21,7 @@ movieController.post('/create', async (req, res) => {
     res.redirect('/')
 
     res.end();
-})
+});
 
 movieController.get('/:movieId/details', async (req, res) => {
     //get movie id from params
@@ -34,7 +34,7 @@ movieController.get('/:movieId/details', async (req, res) => {
     const isOwner = movie.owner?.equals(userId);
 
     res.render('movie/details', { movie, isOwner });
-})
+});
 
 movieController.get('/search', async (req, res) => {
     //get query string
@@ -43,7 +43,7 @@ movieController.get('/search', async (req, res) => {
     const movies = await movieService.getAll(filter);
 
     res.render('search', { movies, filter });
-})
+});
 
 movieController.get('/:movieId/attach', async (req, res) => {
     const movieId = req.params.movieId;
@@ -56,7 +56,7 @@ movieController.get('/:movieId/attach', async (req, res) => {
 
     // pass casts to template
     res.render('movie/attach', { movie, casts });
-})
+});
 
 movieController.post('/:movieId/attach', async (req, res) => {
     //get movieid
@@ -70,7 +70,7 @@ movieController.post('/:movieId/attach', async (req, res) => {
 
     res.redirect(`/movies/${movieId}/details`);
 
-})
+});
 
 movieController.get('/:movieId/delete', async (req, res) => {
     const movieId = req.params.movieId;
@@ -78,5 +78,10 @@ movieController.get('/:movieId/delete', async (req, res) => {
     await movieService.delete(movieId);
 
     res.redirect('/');
+});
+
+movieController.get('/:movieId/edit', async(req,res) => {
+    res.render('movie/edit')
 })
+
 export default movieController;
