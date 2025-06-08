@@ -42,8 +42,6 @@ export default {
         // populate - before we await the document, populate the given array, not with just the ids
         //it will get all the referenced casts and populate the array
         
-
-        console.log(movie);
         
         return movie;
     },

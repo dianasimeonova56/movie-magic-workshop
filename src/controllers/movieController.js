@@ -80,8 +80,16 @@ movieController.get('/:movieId/delete', async (req, res) => {
     res.redirect('/');
 });
 
-movieController.get('/:movieId/edit', async(req,res) => {
-    res.render('movie/edit')
+movieController.get('/:movieId/edit', async (req, res) => {
+    const movieId = req.params.movieId;
+
+    const movie = await movieService.getOne(movieId);
+
+    //if owner
+
+
+
+    res.render('movie/edit', { movie })
 })
 
 export default movieController;
