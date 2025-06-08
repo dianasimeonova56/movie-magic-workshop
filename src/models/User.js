@@ -13,8 +13,12 @@ const userSchema = new Schema({
 })
 
 userSchema.pre('save', async function() {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+    //const salt = await bcrypt.genSalt(10);
+
+    //we can generate salt with .hash direclty
+    //this.password = await bcrypt.hash(this.password, salt);
+
+    this.password = await bcrypt.hash(this.password, 10); //10 rounds of generating salt
 })
 const User = model('User', userSchema);
 
