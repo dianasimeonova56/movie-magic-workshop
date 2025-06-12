@@ -24,7 +24,7 @@ const userSchema = new Schema({
         required: [true, "Please provide password"],
         validate: /^[a-zA-Z0-9]+$/,
         minLength: [6, 'Password should be at least 6 chars long'],
-        
+
     },
 })
 //validate if user email is unique with custom validator
@@ -45,6 +45,15 @@ userSchema.pre('save', async function () {
 
     this.password = await bcrypt.hash(this.password, 10); //10 rounds of generating salt
 })
+
+//validate repass using virtual setter
+userSchema.virtual('rePassword') // wont be saved in the db
+    .set(function(value) {
+        if(this.password !== value) {
+            throw new Error("Password mismatch")
+        }
+    });
+
 const User = model('User', userSchema);
 
 export default User;
