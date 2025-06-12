@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose'
+import { Schema, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 
 const userSchema = new Schema({
@@ -6,16 +6,34 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'User email is required'],
         unique: true,//db validation, not a model validation
-        
-         
+        // validate: {
+        //     //custom schema validator
+        //     validator: async function (value) {
+        //         const existingUser = await User.findOne({ email: value });
+
+        //         if (existingUser) {
+        //             throw new Error("User already exists");
+        //         }
+        //     }
+        // }
+
     },
     password: {
         type: String,
         required: [true, "Please provide password"],
     },
 })
+//validate if user email is unique with custom validator
+// userSchema.path('email').validate(async function (value) {
+//     const existingUser = await User.findOne({ email: value });
 
-userSchema.pre('save', async function() {
+//     if (existingUser) {
+//         throw new Error("User already exists");
+//     }
+
+// })
+
+userSchema.pre('save', async function () {
     //const salt = await bcrypt.genSalt(10);
 
     //we can generate salt with .hash direclty

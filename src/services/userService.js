@@ -9,6 +9,7 @@ export default {
         if(existingUser) {
             throw new Error("User already exists");
         }
+        
         const user = await User.create(userData);
 
         const token = generateAuthToken(user);
