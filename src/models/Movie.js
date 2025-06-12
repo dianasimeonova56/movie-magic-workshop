@@ -14,6 +14,10 @@ const movieSchema = new Schema({
         required: [true, "Field category is required!"],
         validate: [validCharsPattern, 'Invalid category format! Only english letters, digits and whitespaces are allowed'],
         minLength: [5, "Should be at least 5 chars long!"],
+        enum: {
+            values: ['tv-show', 'animation', 'movie', 'documentary', 'short-film'],
+            message: (props) => `${props.value} is not a valid category`
+        }
     },
     genre: {
         type: String,
