@@ -6,7 +6,8 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'User email is required'],
         unique: true,//db validation, not a model validation
-        validate: [/@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/, 'Invalid email format'];
+        minLength: [10, 'Email should be at least 10 chars long'],
+        validate: [/@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/, 'Invalid email format']
         
         // validate: {
         //     //custom schema validator
