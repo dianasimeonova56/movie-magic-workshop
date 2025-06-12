@@ -22,6 +22,9 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, "Please provide password"],
+        validate: /^[a-zA-Z0-9]+$/,
+        minLength: [6, 'Password should be at least 6 chars long'],
+        
     },
 })
 //validate if user email is unique with custom validator
