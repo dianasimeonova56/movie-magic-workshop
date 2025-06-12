@@ -6,14 +6,14 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'User email is required'],
         unique: true,//db validation, not a model validation
+        validate: [/@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/, 'Invalid email format'];
+        
         // validate: {
         //     //custom schema validator
         //     validator: async function (value) {
         //         const existingUser = await User.findOne({ email: value });
 
-        //         if (existingUser) {
-        //             throw new Error("User already exists");
-        //         }
+        //         return !existingUser;
         //     }
         // }
 
