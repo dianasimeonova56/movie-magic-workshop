@@ -4,17 +4,22 @@ import userService from '../services/userService.js';
 const userController = Router();
 
 userController.get('/register', (req, res) => {
-    res.render('user/register')
+    res.render('user/register');
 })
 
 userController.post('/register', async (req, res) => {
     const { email, password, rePassword } = req.body;
 
-    const token = await userService.register({ email, password, rePassword });
+    try {
+        const token = await userService.register({ email, password, rePassword });
 
-    res.cookie('auth', token);
+        res.cookie('auth', token);
 
-    res.redirect('/');
+        res.redirect('/');
+    } catch (err) {
+        res.render('user/register', {error: err.message});
+    }
+
 })
 
 userController.get('/login', (req, res) => {
