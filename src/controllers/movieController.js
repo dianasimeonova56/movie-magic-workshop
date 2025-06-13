@@ -103,7 +103,11 @@ movieController.get('/:movieId/edit', isAuth, async (req, res) => {
     const isOwner = movie.owner?.equals(userId);
 
     if (!isOwner) {
-        return res.status(403).end();
+        //this way we dont store id in the url
+        //message is stored only once and then deleted
+      return res.dataRedirect('404', {error: "You dont have access to edit this movie!"});
+      //return res.render('404', {error: "You dont have access to edit this movie!"})
+
     }
 
     const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);

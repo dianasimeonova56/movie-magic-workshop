@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import { auth } from "./middlewares/authMiddleware.js";
 import routes from "./routes.js";
+import session from "express-session";
+import { tempData } from "./middlewares/tempDataMiddleware.js";
 
 //init express instance
 const app = express();
@@ -20,9 +22,17 @@ app.use(express.urlencoded());
 // middleware from express that is a body parser - if there is data in the requests, it reads it and accumulates it in chunks
 // now we have req.body 
 
+app.use(session({
+    secret: 'HVFTXGQAVYTgbjnHYGYUgjhb',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true, httpOnly: true }
+}))
+
 //add auth middleware
 app.use(auth);
 
+app.use(tempData); // store temporary data 
 
 //add and config view engine
 app.engine('hbs', handlebars.engine({
@@ -48,7 +58,7 @@ app.engine('hbs', handlebars.engine({
 try {
     mongoose.connect('mongodb://localhost:27017', { dbName: 'magic-movies' });
     console.log("Successfully connected to db");
-    
+
 } catch (err) {
     console.log('cannot connect to db');
     console.log(err.message);
