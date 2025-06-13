@@ -105,7 +105,7 @@ movieController.get('/:movieId/edit', isAuth, async (req, res) => {
     if (!isOwner) {
         //this way we dont store id in the url
         //message is stored only once and then deleted
-      return res.dataRedirect('404', {error: "You dont have access to edit this movie!"});
+      return res.dataRedirect('404', {error: "You dont have access to edit this movie!",});
       //return res.render('404', {error: "You dont have access to edit this movie!"})
 
     }
