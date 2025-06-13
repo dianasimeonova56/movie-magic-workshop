@@ -3,11 +3,12 @@ import movieService from '../services/movieService.js';
 import castService from '../services/castService.js';
 import { getCategoryOptionsViewData } from '../utils/movieUtils.js';
 import { isAuth } from '../middlewares/authMiddleware.js';
+import { getErrorMessage } from '../utils/errorUtils.js';
 
 const movieController = express.Router();
 // 'movie' comes from the index.js
 movieController.get('/create', isAuth, (req, res) => {
-    res.render('create');
+    res.render('movie/create');
 });
 
 movieController.post('/create', isAuth, async (req, res) => {
@@ -15,14 +16,22 @@ movieController.post('/create', isAuth, async (req, res) => {
 
     const newMovie = req.body;
 
+
     //save movie
-    await movieService.create(newMovie, userId);
+    try {
+        await movieService.create(newMovie, userId);
+        //redirect to home page
+        res.redirect('/');
+    } catch (err) {
 
+        const categoryOptionsViewData = getCategoryOptionsViewData(newMovie.category);
+        red.render('movie/create', {
+            error: getErrorMessage(err),
+            movie: newMovie,
+            categoryOptions: categoryOptionsViewData
+        })
+    }
 
-    //redirect to home page
-    res.redirect('/')
-
-    res.end();
 });
 
 movieController.get('/:movieId/details', async (req, res) => {
@@ -74,7 +83,7 @@ movieController.post('/:movieId/attach', isAuth, async (req, res) => {
 
 });
 
-movieController.get('/:movieId/delete',isAuth, async (req, res) => {
+movieController.get('/:movieId/delete', isAuth, async (req, res) => {
     const movieId = req.params.movieId;
 
     await movieService.delete(movieId);
@@ -100,11 +109,11 @@ movieController.get('/:movieId/edit', isAuth, async (req, res) => {
     const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);
 
 
-    res.render('movie/edit', { 
+    res.render('movie/edit', {
         pageTitle: 'Edit',
-        movie, 
+        movie,
         categoryOptions: categoryOptionsViewData
-     });
+    });
 })
 
 movieController.post('/:movieId/edit', isAuth, async (req, res) => {
